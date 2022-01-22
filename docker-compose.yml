@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  redis:
+    image: redis:latest
+  app:
+    build: .
+    container_name: node-emaww
+    ports:
+      - "80:3000"
+    environment:
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - .:/var/app/current
+    command: sh -c 'npm install && npm start'
